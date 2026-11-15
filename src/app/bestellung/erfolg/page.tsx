@@ -10,7 +10,6 @@ export const metadata: Metadata = { title: "Danke für deine Bestellung", robots
 export default function SuccessPage({ searchParams }: PageProps<"/bestellung/erfolg">) {
   return (
     <div className="mx-auto max-w-2xl px-4 py-20 text-center sm:px-6">
-      <ClearCart />
       <p className="mb-4 text-xs font-semibold tracking-[0.25em] text-copper uppercase">Bestellung erhalten</p>
       <h1 className="text-5xl">Vielen Dank!</h1>
       <Suspense fallback={<p className="mt-6 text-ink-soft">Bestellung wird geladen …</p>}>
@@ -39,9 +38,13 @@ async function Details({ searchParams }: { searchParams: PageProps<"/bestellung/
   }
   const name = session.collected_information?.shipping_details?.name?.split(" ")[0];
   return (
-    <p className="mt-6 text-lg">
-      {name ? `${name}, deine` : "Deine"} Bestellung über <strong>{formatEUR(session.amount_total ?? 0)}</strong> ist
-      bei uns eingegangen.
-    </p>
+    <>
+      {/* Empty the cart only once Stripe confirms the payment. */}
+      <ClearCart />
+      <p className="mt-6 text-lg">
+        {name ? `${name}, deine` : "Deine"} Bestellung über <strong>{formatEUR(session.amount_total ?? 0)}</strong> ist
+        bei uns eingegangen.
+      </p>
+    </>
   );
 }

@@ -7,7 +7,7 @@ and shop settings, cart and order validation, the Stripe client (Stripe
 also serves as the order database), DHL Parcel DE Shipping API v2 label
 creation, and SMTP shipping-notice mail.
 
-`products.ts`, `shop.ts` and `order.ts` have no `server-only` import and
+`products.ts`, `shop.ts`, `order.ts` and `care.ts` have no `server-only` import and
 can be used from client and server code. `stripe.ts`, `orders.ts`,
 `dhl.ts` and `mail.ts` start with `import "server-only"` and must only be
 imported from server code.
@@ -82,6 +82,13 @@ imported from server code.
 - `fetchLabel(shipmentNo): Promise<Buffer>`
 - `trackingUrl(shipmentNo): string`: dhl.de tracking link
 
+### `care.ts` (safety and care texts)
+
+- `drinkwareSafetyNotes: string[]`: notes for products that touch drinks
+- `copperCareNotes: string[]`: care notes for every copper product
+- Single source for `src/app/pflege/page.tsx` and
+  `src/app/produkte/[slug]/page.tsx`
+
 ### `mail.ts` (server-only, SMTP)
 
 - `mailConfigured(): boolean`: true when `SMTP_HOST` and `MAIL_FROM` are set
@@ -155,7 +162,7 @@ imported from server code.
     `SHIPPER_POSTAL_CODE`, `SHIPPER_CITY`, `SHIPPER_EMAIL`
   - Mail: `SMTP_*`, `MAIL_FROM`
   - Shop: `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_CONTACT_EMAIL`
-- `products.ts`, `shop.ts` and `order.ts` have no I/O.
+- `products.ts`, `shop.ts`, `order.ts` and `care.ts` have no I/O.
 
 ## Verification
 

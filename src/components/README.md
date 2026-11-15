@@ -43,7 +43,8 @@ them (`cart-view.tsx` imports `ProductImage`).
   (`shippingCents`), a free-shipping progress bar
   (`shop.shipping.freeFromCents`), and the checkout button.
 - `ClearCart()` (`clear-cart.tsx`): renders `null` and calls `clear()` once
-  `ready`. Used by `src/app/bestellung/erfolg/page.tsx`.
+  `ready`. Used by `src/app/bestellung/erfolg/page.tsx`, which renders it only
+  after Stripe reports the payment as `paid`.
 
 ### Presentational
 
@@ -87,9 +88,9 @@ them (`cart-view.tsx` imports `ProductImage`).
   `slug:variantId` when a variant is set (`src/lib/products.ts:lineKey`). At
   most one line exists per key (`cart.tsx:add` merges into an existing line).
 - Quantity limits:
-  - `add` caps a merged line at `shop.maxQuantityPerLine` (currently 10).
-    It does not cap the quantity of a newly appended line. Callers such as
-    `AddToCart` cap their own input to `[1, shop.maxQuantityPerLine]`.
+  - `add` clamps a new line to `[1, shop.maxQuantityPerLine]` (currently 10)
+    and caps a merged line at `shop.maxQuantityPerLine`. `AddToCart` also
+    caps its own input to `[1, shop.maxQuantityPerLine]`.
   - `setQuantity` clamps to `[0, shop.maxQuantityPerLine]` and removes lines
     whose quantity reaches `0`. It never creates a line.
 - Writes to `localStorage` are skipped until `ready` is `true`
@@ -121,7 +122,7 @@ them (`cart-view.tsx` imports `ProductImage`).
   - On a non-OK response or a missing `url`, it shows `data.error` or a
     fallback message.
 - `ClearCart` empties the cart, and so the stored `localStorage` cart, when it
-  mounts on the order-success page.
+  mounts on the order-success page (only for paid sessions).
 
 ## Verification
 

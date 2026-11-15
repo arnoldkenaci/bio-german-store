@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { AddToCart } from "@/components/add-to-cart";
 import { ProductCard } from "@/components/product-card";
 import { ProductImage } from "@/components/product-image";
+import { copperCareNotes, drinkwareSafetyNotes } from "@/lib/care";
 import { categories, getProduct, products } from "@/lib/products";
 import { formatEUR, shop } from "@/lib/shop";
 
@@ -120,14 +121,9 @@ export default async function ProductPage({ params }: PageProps<"/produkte/[slug
           <details className="mt-8 rounded-2xl bg-sand p-5">
             <summary className="cursor-pointer font-medium">Pflege & Sicherheitshinweise</summary>
             <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm text-ink-soft">
-              {product.drinkware && (
-                <>
-                  <li>Nur für stilles Wasser. Keine säurehaltigen Getränke (Saft, Zitronenwasser), Milch oder kohlensäurehaltige Getränke einfüllen.</li>
-                  <li>Nicht für Säuglinge und Kleinkinder.</li>
-                </>
-              )}
-              <li>Nicht spülmaschinengeeignet. Von Hand reinigen und gut trocknen lassen.</li>
-              <li>Dunkle Verfärbungen (Patina) sind natürlich und lassen sich mit Zitrone und Salz entfernen.</li>
+              {[...(product.drinkware ? drinkwareSafetyNotes : []), ...copperCareNotes].map((note) => (
+                <li key={note}>{note}</li>
+              ))}
             </ul>
             <Link href="/pflege" className="mt-3 inline-block text-sm text-copper underline">Ausführliche Pflegeanleitung</Link>
           </details>

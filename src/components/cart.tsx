@@ -59,7 +59,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           l === existing ? { ...l, quantity: Math.min(shop.maxQuantityPerLine, l.quantity + quantity) } : l,
         );
       }
-      return [...prev, { slug, variantId, quantity }];
+      return [...prev, { slug, variantId, quantity: Math.max(1, Math.min(shop.maxQuantityPerLine, quantity)) }];
     });
   }, []);
 

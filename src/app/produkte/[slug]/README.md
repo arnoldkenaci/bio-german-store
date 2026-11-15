@@ -13,7 +13,7 @@ Statically generated product detail page with an image gallery, add-to-cart, des
 - An unknown slug calls `notFound()`.
 - JSON-LD `offers` is included only when `product.priceCents !== null`. The price is `priceCents / 100` with 2 decimals, in EUR. JSON is escaped with `.replace(/</g, "\\u003c")` before `dangerouslySetInnerHTML`.
 - Related products: up to 3 other products with `featured` set.
-- Drinkware-specific safety notes are shown only when `product.drinkware` is true.
+- Care notes come from `@/lib/care`: `drinkwareSafetyNotes` only when `product.drinkware` is true, then `copperCareNotes` for every product.
 - The free-shipping threshold comes from `shop.shipping.freeFromCents`.
 
 ## Side Effects

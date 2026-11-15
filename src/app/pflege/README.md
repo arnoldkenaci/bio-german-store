@@ -4,11 +4,11 @@
 Static content page with usage, cleaning, and safety guidance for copper bottles, cups, and tongue cleaners. Product pages link to it from the "Pflege & Sicherheitshinweise" section.
 
 ## Interface
-- `Page()` (default export) in `page.tsx`: renders `<TextPage title="Pflege & Anwendung">` from `@/components/text-page`.
+- `Page()` (default export) in `page.tsx`: renders `<TextPage title="Pflege & Anwendung">` from `@/components/text-page`, with the shared notes from `@/lib/care` plus page-only usage tips.
 - `metadata`: title "Pflege & Anwendung" plus a description.
 
 ## Invariants
-- Contains safety notices (still water only; no acidic, milk, or carbonated drinks; not for infants; not dishwasher-safe). These must stay consistent with the safety list in `produkte/[slug]/page.tsx`.
+- The safety and care lists come from `drinkwareSafetyNotes` and `copperCareNotes` in `@/lib/care`, the same source the product pages use. Change the notes there, not in this page.
 
 ## Side Effects
 - None

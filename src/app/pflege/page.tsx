@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { TextPage } from "@/components/text-page";
+import { copperCareNotes, drinkwareSafetyNotes } from "@/lib/care";
 
 export const metadata: Metadata = {
   title: "Pflege & Anwendung",
@@ -20,16 +21,17 @@ export default function Page() {
       <h2>So verwendest du deine Kupferflasche</h2>
       <ul>
         <li>Fülle die Flasche am Abend mit stillem Wasser und lass sie über Nacht stehen.</li>
-        <li>Verwende nur stilles Wasser. Säurehaltige Getränke (Saft, Zitronenwasser, Tee mit Zitrone), Milch und kohlensäurehaltige Getränke gehören nicht in Kupfergefäße.</li>
-        <li>Kupfergefäße sind nicht für Säuglinge und Kleinkinder bestimmt.</li>
-        <li>Nicht für heiße Getränke, nicht in die Mikrowelle und nicht in den Gefrierschrank.</li>
+        {drinkwareSafetyNotes.map((note) => (
+          <li key={note}>{note}</li>
+        ))}
       </ul>
 
       <h2>Reinigung</h2>
       <ul>
-        <li>Nicht spülmaschinengeeignet – bitte nur von Hand mit warmem Wasser reinigen.</li>
+        {copperCareNotes.map((note) => (
+          <li key={note}>{note}</li>
+        ))}
         <li>Nach dem Spülen gut abtropfen und mit geöffnetem Deckel trocknen lassen.</li>
-        <li>Keine Scheuermittel oder Stahlwolle verwenden.</li>
       </ul>
 
       <h2>Warum wird Kupfer dunkel?</h2>
