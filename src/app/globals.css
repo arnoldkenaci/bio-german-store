@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+/* India House brand tokens: cream, sand, copper, dark brown. */
+@theme {
+  --color-cream: #f8f3ec;
+  --color-sand: #ece1d2;
+  --color-sand-dark: #d9c8b1;
+  --color-copper: #b5652f;
+  --color-copper-dark: #8f4a1f;
+  --color-copper-light: #d89a6a;
+  --color-ink: #3a2a1e;
+  --color-ink-soft: #6b5646;
+  --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+@layer base {
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-copper);
+  outline-offset: 2px;
+}
+
+}
+
+@layer components {
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.8rem 1.6rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+}
+.btn-primary {
+  background: var(--color-copper);
+  color: #fff;
+}
+.btn-primary:hover {
+  background: var(--color-copper-dark);
+}
+.btn-primary:disabled {
+  background: var(--color-sand-dark);
+  color: var(--color-ink-soft);
+  cursor: not-allowed;
+}
+.btn-outline {
+  border: 1px solid var(--color-ink);
+  color: var(--color-ink);
+}
+.btn-outline:hover {
+  background: var(--color-ink);
+  color: var(--color-cream);
+}
+
+.prose-legal h2 {
+  font-size: 1.6rem;
+  margin: 2rem 0 0.75rem;
+}
+.prose-legal p,
+.prose-legal li {
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+  color: var(--color-ink-soft);
+}
+.prose-legal ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+}
+}
